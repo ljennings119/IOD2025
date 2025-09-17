@@ -1,0 +1,40 @@
+* {
+box-sizing: border-box;
+margin: 0;
+}
+body {
+font-family: sans-serif;
+}
+header {
+background-color: blue;
+font-size: 200%;
+color: white;
+text-align: center;
+padding: 50px;
+}
+nav {
+float: left;
+background-color: gold;
+font-size: 30px;
+width: 20%;
+height: 125px;
+padding: 5px;
+}
+article {
+background-color: whitesmoke;
+font-size: larger;
+float: left;
+width: 80%;
+height: 125px;
+padding: 20px;
+}
+aside {
+clear: both;
+}
+footer {
+background: #222;
+color: #eee;
+text-align: center;
+padding: 0.5em;
+font-size: 0.9em;
+}
