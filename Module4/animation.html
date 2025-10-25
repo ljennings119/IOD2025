@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSS Animation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com"
+crossorigin>
+<link
+href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&
+display=swap" rel="stylesheet">
+<style>
+p { animation-name: slidein;
+animation-duration: 3s; 
+animation-iteration-count: infinite}
+@keyframes slidein {
+from { margin-left: 100%; }
+50% { font-size: 300%; margin-left: 40%} 
+to { margin-left: 50%; }
+}
+
+p { font-family: sans-serif;
+font-size: 24px;
+font-weight: bold;
+color: black;
+transition: color 5s; }
+
+p:hover { color: purple; }
+
+body {
+font-family: 'Roboto Mono', monospace;
+}
+
+</style>
+</head>
+<body>
+    <h2> Google Fonts</h2>
+<p>Hello World!</p>
+</body>
+</html>
