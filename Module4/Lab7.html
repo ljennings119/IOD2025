@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Square Animation</title>
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background-color: grey;
+        }
+
+       .square {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+        position: relative;
+        animation: slideDownUp 4s infinite ease-in-out;
+       }
+
+       @keyframes slideDownUp {
+        0% {
+            top: 0;
+            background-color: blue;
+        }
+        50% {
+            top: 300px;
+            background-color: black;
+        }
+        100% {
+            top: 0;
+            background-color: blue;
+        }
+       }
+    </style>
+</head>
+<body>
+   <div class="square"></div>
+    
+</body>
+</html>
