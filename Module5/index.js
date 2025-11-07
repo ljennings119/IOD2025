@@ -37,7 +37,7 @@
 // http://localhost:${port}`)
 // })
 
-const app = require('./app'); // import the app
+const app = require('./app'); 
 const port = 3000;
 
 app.listen(port, () => {
