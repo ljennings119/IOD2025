@@ -1,4 +1,4 @@
-const express = require("express"); // import express
+const express = require("express"); 
 const friendRoutes = require("./routes/friendRoutes");
 const movieRoutes = require("./routes/movieRoutes"); 
 
