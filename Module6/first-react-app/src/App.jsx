@@ -17,6 +17,8 @@ import {ErrorBoundary} from 'react-error-boundary'
 import ErrorMessage from './components/ErrorMessage.jsx'
 import ExplodingBomb from './components/ExplodingBomb.jsx'
 import Greeting from "./components/Greeting"
+import BigCats from "./components/BigCats"
+
 
 // function ExampleComponent() {
 //   return (
@@ -148,6 +150,11 @@ message="Simple message with a fancy box applied via composition">
     <div>
       <Greeting name="John">This is your custom greeting message!!</Greeting>
       <Greeting>Hello from Lauren</Greeting> 
+       </div>
+
+       <div>
+        <h1>Big Cats</h1>
+        <BigCats />
        </div>
     
     </>
