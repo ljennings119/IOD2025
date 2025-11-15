@@ -18,6 +18,7 @@ import ErrorMessage from './components/ErrorMessage.jsx'
 import ExplodingBomb from './components/ExplodingBomb.jsx'
 import Greeting from "./components/Greeting"
 import BigCats from "./components/BigCats"
+import Emoji from './components/Emoji.jsx'
 
 
 // function ExampleComponent() {
@@ -155,6 +156,11 @@ message="Simple message with a fancy box applied via composition">
        <div>
         <h1>Big Cats</h1>
         <BigCats />
+       </div>
+
+       <div>
+        <h1>Mood Change</h1>
+        <Emoji />
        </div>
     
     </>
