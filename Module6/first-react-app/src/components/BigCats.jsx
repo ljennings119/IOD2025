@@ -1,57 +1,41 @@
 import { useState } from "react";
 import cats from "../data/cats.js";
 import SingleCat from "./SingleCat.jsx";
+import AddCatForm from "./AddCatForm.jsx";
 
 export default function BigCats() {
-  // state to hold the current list being displayed
   const [catList, setCatList] = useState(cats);
 
-  // sort A–Z
-  function sortAZ() {
-    const sorted = [...catList].sort((a, b) =>
-      a.name.localeCompare(b.name)
-    );
-    setCatList(sorted);
+  // Add new cat
+  function addCat(newCat) {
+    setCatList([...catList, newCat]);
   }
 
-  // reverse Z–A
-  function sortReverse() {
-    const reversed = [...catList].slice().reverse();
-    setCatList(reversed);
-  }
-
-  // filter only Panthera cats
-function filterPanthera() {
-  const filtered = cats.filter(cat =>
-    cat.latinName.startsWith("Panthera")
-  );
-  setCatList(filtered);
-}
-
-
-  // reset to original list
-  function resetList() {
-    setCatList(cats);
+  // Delete cat
+  function deleteCat(id) {
+    const updated = catList.filter(cat => cat.id !== id);
+    setCatList(updated);
   }
 
   return (
     <div>
-      {/* Buttons */}
-      <div style={styles.buttons}>
-        <button onClick={sortAZ}>A–Z</button>
-        <button onClick={sortReverse}>Reverse</button>
-        <button onClick={filterPanthera}>Panthera Only</button>
-        <button onClick={resetList}>Reset</button>
-      </div>
+      <AddCatForm onAddCat={addCat} />
 
-      {/* Cat display area */}
       <div style={styles.wrapper}>
         {catList.map(cat => (
-          <SingleCat
-            key={cat.id}
-            name={cat.name}
-            latinName={cat.latinName}
-          />
+          <div key={cat.id}>
+            <SingleCat
+              name={cat.name}
+              latinName={cat.latinName}
+              image={cat.image}
+            />
+            <button
+              onClick={() => deleteCat(cat.id)}
+              style={{ marginTop: "5px", display: "block" }}
+            >
+              Delete
+            </button>
+          </div>
         ))}
       </div>
     </div>
@@ -64,10 +48,5 @@ const styles = {
     gap: "20px",
     flexWrap: "wrap",
     padding: "20px",
-  },
-  buttons: {
-    display: "flex",
-    gap: "10px",
-    padding: "10px 20px",
-  },
+  }
 };
