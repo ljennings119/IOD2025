@@ -19,6 +19,7 @@ import ExplodingBomb from './components/ExplodingBomb.jsx'
 import Greeting from "./components/Greeting"
 import BigCats from "./components/BigCats"
 import Emoji from './components/Emoji.jsx'
+import Calculator from './components/Calculator.jsx'
 
 
 // function ExampleComponent() {
@@ -162,6 +163,8 @@ message="Simple message with a fancy box applied via composition">
         <h1>Mood Change</h1>
         <Emoji />
        </div>
+
+       <Calculator />
     
     </>
   )
