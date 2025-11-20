@@ -6,6 +6,35 @@ import AddCatForm from "./AddCatForm.jsx";
 export default function BigCats() {
   const [catList, setCatList] = useState(cats);
 
+ // Sort A–Z
+  function sortAZ() {
+    const sorted = [...catList].sort((a, b) =>
+      a.name.localeCompare(b.name)
+    );
+    setCatList(sorted);
+  }
+
+  // Sort Z–A
+  function sortZA() {
+    const sorted = [...catList].sort((a, b) =>
+      b.name.localeCompare(a.name)
+    );
+    setCatList(sorted);
+  }
+
+  // Filter Panthera family only
+  function filterPanthera() {
+    const filtered = cats.filter(cat =>
+      cat.latinName.startsWith("Panthera")
+    );
+    setCatList(filtered);
+  }
+
+  // Reset list
+  function resetList() {
+    setCatList(cats);
+  }
+
   // Add new cat
   function addCat(newCat) {
     setCatList([...catList, newCat]);
@@ -20,6 +49,13 @@ export default function BigCats() {
   return (
     <div>
       <AddCatForm onAddCat={addCat} />
+
+    <div style={styles.buttonRow}>
+        <button onClick={sortAZ}>Sort A–Z</button>
+        <button onClick={sortZA}>Sort Z–A</button>
+        <button onClick={filterPanthera}>Panthera Only</button>
+        <button onClick={resetList}>Reset</button>
+      </div>
 
       <div style={styles.wrapper}>
         {catList.map(cat => (
