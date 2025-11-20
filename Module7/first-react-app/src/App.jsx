@@ -31,6 +31,8 @@ import MyThemeProvider from './context/MyThemeContext.jsx'
 import AppRoutes from './routes/AppRoutes.jsx'
 import NavBar from './components/NavBar.jsx'
 import BitcoinRates from './components/BitcoinRates.jsx'
+import { MoodProvider } from './hooks/MoodContext.jsx'
+import Emoji from './components/Emoji.jsx'
 
 function App() {
 
@@ -44,7 +46,13 @@ function App() {
           <AppRoutes />
         </MyThemeProvider>
       </UserProvider> */}
-      <BitcoinRates />
+      {/* <BitcoinRates /> */}
+      <MoodProvider>
+        <div className="App">
+          <Emoji />
+          <BitcoinRates />
+        </div>
+      </MoodProvider>
 
 
     </>

@@ -1,10 +1,14 @@
-import { useState } from "react";
-import useBitcoinRate from "../hooks/useBitcoinRate";
+import { useState, useContext } from "react";
+import useBitcoinRate from "../hooks/useBitcoinRate.js";
+import { MoodContext } from "../hooks/MoodContext.jsx";   
 
 const currencies = ["USD", "AUD", "NZD", "GBP", "EUR", "SGD"];
 
 export default function BitcoinRates() {
   const [currency, setCurrency] = useState(currencies[0]);
+
+
+  const { mood } = useContext(MoodContext);
 
   const { price, loading, error } = useBitcoinRate(currency);
 
@@ -16,11 +20,14 @@ export default function BitcoinRates() {
 
   return (
     <div className="BitcoinRates componentBox">
-      <h3>Bitcoin Exchange Rate</h3>
+      <h3>Bitcoin Exchange Rate {mood}</h3> 
 
       <label>
         Choose currency:
-        <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
+        <select
+          value={currency}
+          onChange={(e) => setCurrency(e.target.value)}
+        >
           {options}
         </select>
       </label>
@@ -37,3 +44,4 @@ export default function BitcoinRates() {
     </div>
   );
 }
+
