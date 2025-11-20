@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { UserProvider } from './context/UserContext'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -33,6 +34,11 @@ import NavBar from './components/NavBar.jsx'
 import BitcoinRates from './components/BitcoinRates.jsx'
 import { MoodProvider } from './hooks/MoodContext.jsx'
 import Emoji from './components/Emoji.jsx'
+import Navbar from './components/NavbarM7L4.jsx'
+import Home from "./pages/HomeM7L4.jsx";
+import Login from "./pages/LoginM7L4.jsx";
+import BitcoinPage from "./pages/BitcoinPageM7L4.jsx";
+
 
 function App() {
 
@@ -46,13 +52,29 @@ function App() {
           <AppRoutes />
         </MyThemeProvider>
       </UserProvider> */}
+
       {/* <BitcoinRates /> */}
-      <MoodProvider>
+
+      {/* <MoodProvider>
         <div className="App">
           <Emoji />
           <BitcoinRates />
         </div>
-      </MoodProvider>
+      </MoodProvider> */}
+
+      <MoodProvider>
+     
+        <Navbar />
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/bitcoin" element={<BitcoinPage />} />
+        </Routes>
+
+  
+    </MoodProvider>
+
 
 
     </>
