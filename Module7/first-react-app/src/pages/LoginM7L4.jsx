@@ -1,24 +1,36 @@
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+
 export default function Login() {
   return (
-    <div className="componentBox">
-      <h2>Login Page</h2>
+    <Box sx={{ maxWidth: 400, margin: "2rem auto" }}>
+      <Paper sx={{ padding: 3 }}>
+        <h2>Login</h2>
 
-      <form>
-        <label>
-          Username:
-          <input type="text" />
-        </label>
-        <br />
+        <TextField
+          fullWidth
+          label="Username"
+          margin="normal"
+        />
 
-        <label>
-          Password:
-          <input type="password" />
-        </label>
-        <br />
+        <TextField
+          fullWidth
+          type="password"
+          label="Password"
+          margin="normal"
+        />
 
-        <button>Login</button>
-      </form>
-
-    </div>
+        <Button
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ marginTop: 2 }}
+        >
+          Login
+        </Button>
+      </Paper>
+    </Box>
   );
 }
