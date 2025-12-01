@@ -1,0 +1,282 @@
+/* ---------- FONTS & GLOBAL STYLES ---------- */
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@300;400;600;700&display=swap");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #1b1b1b;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "Open Sans", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ---------- HEADER ---------- */
+.logo {
+  position: fixed;
+  top: 1rem;
+  left: 1.5rem;
+  z-index: 2000;
+}
+.logo a {
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-decoration: none;
+  font-family: "Lobster", cursive;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+}
+.logo span {
+  color: #53c1fc;
+}
+
+/* --- Floating Menu Button (top-right) --- */
+.menu-float {
+  position: fixed;
+  top: 1rem;
+  right: 1.5rem;
+  z-index: 2000;
+  background: #53c1fc;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 6px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: auto;
+  transition: all 0.3s ease;
+}
+.menu-float:hover {
+  background: #ffffff;
+  color: #000000;
+}
+.menu-float i {
+  font-size: 1rem;
+}
+
+/* ---------- SLIDE-OUT MENU ---------- */
+#menu {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 260px;
+  height: 100%;
+  background: #53c1fc;
+  transition: right 0.35s ease;
+  padding-top: 6rem;
+  z-index: 1500;
+}
+#menu.active {
+  right: 0;
+}
+#menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+#menu ul li {
+  margin: 1rem 0;
+}
+#menu ul li a,
+#menu ul li button {
+  color: #fff;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+#menu ul li a:hover,
+#menu ul li button:hover {
+  color: #53c1fc;
+}
+
+/* ---------- SECTION STYLES ---------- */
+section {
+  position: relative;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+section .inner {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ---------- BANNER ---------- */
+#banner h1 {
+  font-size: 3.5em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+#banner h1 span {
+  color: #53c1fc;
+  font-family: "Lobster", cursive;
+}
+
+/* ---------- BOX CONTENT ---------- */
+.box {
+  background: rgba(0, 0, 0, 0.55);
+  padding: 3em;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* ---------- BUTTONS ---------- */
+.button {
+  display: inline-block;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.7em 1.6em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  text-align: center;
+}
+.button.alt {
+  border: 2px solid #fff;
+  background: transparent;
+  color: #fff;
+  margin-top: 1rem;
+}
+.button.alt:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* ---------- MODAL ---------- */
+.modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 3000;
+}
+
+.modal-content {
+  background: #2b2b2b;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 0.6rem;
+  right: 1rem;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #fff;
+}
+
+/* ---------- FOOTER ---------- */
+#footer {
+  padding: 3rem 2rem;
+  background: #111;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  text-align: center;
+}
+#footer .inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subscribe-btn {
+  background-color: #53c1fc;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1.2rem;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: auto;
+}
+.subscribe-btn:hover {
+  background-color: #2b7eab;
+}
+
+/* ---------- SOCIAL ICONS ---------- */
+.social-icons {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+.social-icons li a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: transparent;
+  transition: all 0.3s ease;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+/* Brand hovers */
+.social-icons li a.twitter:hover {
+  background-color: #1da1f2;
+  border-color: #1da1f2;
+}
+.social-icons li a.facebook:hover {
+  background-color: #1877f2;
+  border-color: #1877f2;
+}
+.social-icons li a.instagram:hover {
+  background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+  border-color: transparent;
+}
+
+/* ---------- COPYRIGHT ---------- */
+.copyright {
+  text-align: center;
+  padding: 1rem 0;
+  background: #111;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
+}
