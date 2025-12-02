@@ -11,7 +11,7 @@ export default function CoolFacts() {
   const fetchFact = async (selectedAnimal = animal) => {
     setLoading(true);
     try {
-      const res = await fetch(`https://some-random-api.ml/facts/${selectedAnimal}`);
+      const res = await fetch(`https://some-random-api.com/animal/${selectedAnimal}`);
       const data = await res.json();
       setFact(data.fact || "Wildlife is full of surprises!");
     } catch (err) {
