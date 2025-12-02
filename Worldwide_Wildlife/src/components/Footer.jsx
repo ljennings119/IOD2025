@@ -35,6 +35,8 @@ export default function Footer({ isLoggedIn }) {
           </li>
         </ul>
       </div>
+      <br/>
+      <p>Worldwide Wildlife 2025</p>
     </footer>
   );
 }
