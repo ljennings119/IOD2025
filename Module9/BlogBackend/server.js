@@ -27,7 +27,7 @@ app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/posts", require("./routes/postRoutes"));
 app.use("/api/comments", require("./routes/commentRoutes"));
 
-// error handler
+// error handler.
 app.use((err, req, res, next) => {
   console.error("Unhandled error:", err);
   res.status(500).json({ message: "Server error" });

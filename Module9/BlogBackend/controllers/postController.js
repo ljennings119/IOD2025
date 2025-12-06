@@ -8,7 +8,7 @@ async function createPost(req, res) {
 
     if (!title || !description || !authorId) {
       return res.status(400).json({
-        message: "title, description, and authorId are required"
+        message: "title, description, and authorId are required."
       });
     }
 
