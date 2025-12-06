@@ -8,7 +8,7 @@ async function createComment(req, res) {
     if (!text || !userId || !postId) {
       return res
         .status(400)
-        .json({ message: "text, userId and postId are required" });
+        .json({ message: "text, userId and postId are required." });
     }
 
     const comment = await Comment.create({
