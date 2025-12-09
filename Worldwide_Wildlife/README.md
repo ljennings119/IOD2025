@@ -1,4 +1,4 @@
-Worldwide Wildlife – Full Stack Mini Project
+Worldwide Wildlife – Full Stack 
 
 ------Description------
 

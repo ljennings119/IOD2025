@@ -8,16 +8,25 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
 
+  const handleLogoClick = () => {
+    closeMenu();
+    if (isLoggedIn) {
+      navigate("/posts");
+    } else {
+      navigate("/");
+    }
+  };
+
   const handleLogout = () => {
     // Clear token from localStorage
     localStorage.removeItem("token");
-    
+
     // Update login state
     setIsLoggedIn(false);
-    
+
     // Close menu
     closeMenu();
-    
+
     // Redirect to home page
     navigate("/");
   };
@@ -31,7 +40,10 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
     <>
       {/* LOGO */}
       <div className="logo">
-        <Link to="/" onClick={closeMenu}>
+        <Link
+          to={isLoggedIn ? "/posts" : "/"}
+          onClick={handleLogoClick}
+        >
           Worldwide <span>Wildlife</span>
         </Link>
       </div>

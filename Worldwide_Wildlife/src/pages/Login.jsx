@@ -49,7 +49,7 @@ export default function Login({ setIsLoggedIn }) {
   return (
     <div style={{ maxWidth: "400px", margin: "80px auto", padding: "20px" }}>
       <h2 style={{ textAlign: "center", color: "#fff", marginBottom: "1.5rem" }}>
-        Login to Worldwide Wildlife
+        Login 
       </h2>
 
       {error && (
@@ -146,8 +146,8 @@ export default function Login({ setIsLoggedIn }) {
         </button>
       </form>
 
-      <p style={{ textAlign: "center", color: "#000000ff", marginTop: "1.5rem" }}>
-        Don't have an account?{" "}
+      <p style={{ textAlign: "center", color: "#fbf7f7ff", marginTop: "1.5rem" }}>
+        Don't have an account? {" "}
         <Link
           to="/create-login"
           style={{

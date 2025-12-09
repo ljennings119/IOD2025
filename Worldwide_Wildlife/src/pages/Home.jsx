@@ -116,29 +116,28 @@ export default function Home() {
         <div className="inner">
           <article className="box">
             <header>
-              <h2>Wildlife Fun Fact</h2>
+              <h2>Wildlife Fun Facts</h2>
             </header>
             <Link
               to="/cool-facts"
-              className="btn btn-success d-block p-3 mt-3"
               style={{
+                display: "block",
                 textDecoration: "none",
                 fontWeight: "600",
-                borderRadius: "8px",
-                fontSize: "1.1rem",
+                borderRadius: "10px",
+                fontSize: "1.15rem",
                 backgroundColor: "#53c1fc",
-                border: "none",
-                color: "#fff"
+                border: "2px solid #53c1fc",
+                color: "#fff",
+                textAlign: "center",
+                padding: "1.5rem 2rem",
+                marginTop: "1rem",
+                transition: "all 0.3s ease",
+                cursor: "pointer",
+                boxShadow: "0 4px 15px rgba(83, 193, 252, 0.3)"
               }}
             >
-              <span style={{
-                fontWeight: "400",
-                fontSize: "0.95rem",
-                display: "block",
-                marginTop: "0.5rem"
-              }}>
-                {fact}
-              </span>
+              {fact}
             </Link>
           </article>
         </div>
