@@ -27,15 +27,15 @@ export default function ViewPost() {
     fetchPost();
   }, [id, token]);
 
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
-  if (!post) return <p style={{ color: "#fff" }}>Loading...</p>;
+  if (error) return <p style={{ color: "red", textAlign: "center", marginTop: "3rem" }}>{error}</p>;
+  if (!post) return <p style={{ color: "#fff", textAlign: "center", marginTop: "3rem" }}>Loading...</p>;
 
   return (
     <div
       style={{
         maxWidth: "700px",
         margin: "2rem auto",
-        padding: "1rem",
+        padding: "1.5rem",
         background: "#222",
         color: "#fff",
         borderRadius: "10px",
@@ -59,15 +59,35 @@ export default function ViewPost() {
       </button>
 
       <h2>{post.title}</h2>
+      <p style={{ marginTop: "1rem", marginBottom: "1.5rem", lineHeight: "1.6" }}>{post.description}</p>
 
-      <p style={{ marginBottom: "1rem" }}>{post.description}</p>
-
+      {/* Display image */}
       {post.imageUrl && (
         <img
           src={post.imageUrl}
           alt={post.title}
-          style={{ maxWidth: "100%", borderRadius: "8px" }}
+          style={{ 
+            maxWidth: "100%", 
+            borderRadius: "8px",
+            display: "block",
+            marginBottom: "1rem"
+          }}
         />
+      )}
+
+      {/* Display video */}
+      {post.mediaUrl && post.mediaUrl.match(/\.(mp4|webm|ogg)$/i) && (
+        <video
+          controls
+          style={{
+            maxWidth: "100%",
+            borderRadius: "8px",
+            display: "block",
+          }}
+        >
+          <source src={post.mediaUrl} />
+          Your browser does not support video playback.
+        </video>
       )}
     </div>
   );

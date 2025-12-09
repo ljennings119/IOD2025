@@ -1,22 +1,30 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import ModalLogin from "./ModalLogin";
 
 export default function Header({ isLoggedIn, setIsLoggedIn }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    setShowLogin(false);
+  const handleLogout = () => {
+    // Clear token from localStorage
+    localStorage.removeItem("token");
+    
+    // Update login state
+    setIsLoggedIn(false);
+    
+    // Close menu
+    closeMenu();
+    
+    // Redirect to home page
+    navigate("/");
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
+  const handleLoginClick = () => {
     closeMenu();
+    navigate("/login");
   };
 
   return (
@@ -45,31 +53,29 @@ export default function Header({ isLoggedIn, setIsLoggedIn }) {
 
           {isLoggedIn && (
             <>
-              <li><Link to="/posts" onClick={closeMenu}>Home</Link></li>
-               </>
+              <li><Link to="/posts" onClick={closeMenu}>Wildlife Feed</Link></li>
+            </>
           )}
 
           <li><Link to="/axolotls" onClick={closeMenu}>Axolotls</Link></li>
           <li><Link to="/platypus" onClick={closeMenu}>Platypus</Link></li>
           <li><Link to="/blackpanther" onClick={closeMenu}>Black Panther</Link></li>
           <li><Link to="/secretarybird" onClick={closeMenu}>Secretary Bird</Link></li>
+          <li><Link to="/cool-facts" onClick={closeMenu}>Cool Facts</Link></li>
 
           <li>
             {isLoggedIn ? (
-              <button onClick={handleLogout}>Logout</button>
+              <button onClick={handleLogout} style={{ cursor: "pointer" }}>
+                Logout
+              </button>
             ) : (
-              <button onClick={() => setShowLogin(true)}>Login</button>
+              <button onClick={handleLoginClick} style={{ cursor: "pointer" }}>
+                Login
+              </button>
             )}
           </li>
         </ul>
       </nav>
-
-      {/* LOGIN MODAL */}
-      <ModalLogin
-        show={showLogin}
-        onClose={() => setShowLogin(false)}
-        onLogin={handleLogin}
-      />
     </>
   );
 }

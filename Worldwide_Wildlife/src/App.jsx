@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./index.css";
 import "./App.css";
@@ -7,13 +7,14 @@ import "./assets/css/main.css";
 import "./assets/css/createLogin.css";
 import "./assets/css/modal.css";
 
-
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 // Pages
 import Home from "./pages/Home"; 
+import Login from "./pages/Login";
+import CreateLogin from "./pages/CreateLogin";
 import CreatePost from "./pages/posts/CreatePost";
 import EditPost from "./pages/posts/EditPost";
 import ViewPost from "./pages/posts/ViewPost";
@@ -24,25 +25,43 @@ import BlackPanther from "./pages/BlackPanther";
 import SecretaryBird from "./pages/SecretaryBird";
 import CoolFacts from "./pages/CoolFacts";
 
-
-
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    !!localStorage.getItem("token")
-  );
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check token validity on mount
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      // Verify token is valid by making a test request
+      fetch("http://localhost:5000/api/auth/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => {
+          if (res.ok) {
+            setIsLoggedIn(true);
+          } else {
+            // Token is invalid, clear it
+            localStorage.removeItem("token");
+            setIsLoggedIn(false);
+          }
+        })
+        .catch(() => {
+          // Token validation failed
+          localStorage.removeItem("token");
+          setIsLoggedIn(false);
+        });
+    }
+  }, []);
 
   return (
     <Router>
       <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-
+      
       <Routes>
-        {/* 👇 The homepage switches depending on login state */}
-        <Route
-          path="/"
-          element={isLoggedIn ? <PostsList /> : <Home />}
-        />
+        <Route path="/" element={<Home />} />
 
-        {/* Posts */}
         <Route
           path="/posts"
           element={
@@ -52,8 +71,8 @@ export default function App() {
           }
         />
 
-        <Route
-          path="/posts/create"
+        <Route 
+          path="/posts/create" 
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <CreatePost />
@@ -61,8 +80,8 @@ export default function App() {
           }
         />
 
-        <Route
-          path="/posts/:id"
+        <Route 
+          path="/posts/:id" 
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <ViewPost />
@@ -70,8 +89,8 @@ export default function App() {
           }
         />
 
-        <Route
-          path="/posts/:id/edit"
+        <Route 
+          path="/posts/:id/edit" 
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <EditPost />
@@ -79,15 +98,27 @@ export default function App() {
           }
         />
 
-        {/* Public animal pages */}
+        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/create-login" element={<CreateLogin />} />
+
+        {/* Public pages */}
         <Route path="/axolotls" element={<Axolotls />} />
         <Route path="/platypus" element={<Platypus />} />
         <Route path="/blackpanther" element={<BlackPanther />} />
         <Route path="/secretarybird" element={<SecretaryBird />} />
-        <Route path="/cool-facts" element={<CoolFacts />} />
+        
+        {/* Protected Cool Facts */}
+        <Route 
+          path="/cool-facts" 
+          element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <CoolFacts />
+            </ProtectedRoute>
+          } 
+        />
       </Routes>
 
-      <Footer />
+      <Footer isLoggedIn={isLoggedIn} />
     </Router>
   );
 }

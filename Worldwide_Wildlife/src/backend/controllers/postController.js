@@ -3,12 +3,19 @@ const Post = require("../models/Post");
 // CREATE POST
 async function createPost(req, res) {
   try {
-    const { title, content, imageUrl } = req.body;
+    const { title, description } = req.body;
+    
+    // If a file was uploaded via multer, use its path
+    let mediaUrl = null;
+    if (req.file) {
+      // You'll need to serve this as a static file or upload to cloud storage
+      mediaUrl = `/uploads/${req.file.filename}`;
+    }
 
     const post = await Post.create({
       title,
-      content,
-      imageUrl: imageUrl || null,
+      description,
+      mediaUrl,
       user: req.user._id
     });
 
@@ -22,7 +29,9 @@ async function createPost(req, res) {
 // GET ALL POSTS
 async function getPosts(req, res) {
   try {
-    const posts = await Post.find().sort({ createdAt: -1 });
+    const posts = await Post.find()
+      .populate("user", "email")
+      .sort({ createdAt: -1 });
     res.json(posts);
   } catch (err) {
     console.error("Get Posts Error:", err);
@@ -30,10 +39,11 @@ async function getPosts(req, res) {
   }
 }
 
-// 🔥 THIS WAS MISSING — GET SINGLE POST BY ID
+// GET SINGLE POST BY ID
 async function getPostById(req, res) {
   try {
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id)
+      .populate("user", "email");
 
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
@@ -49,11 +59,24 @@ async function getPostById(req, res) {
 // UPDATE POST
 async function updatePost(req, res) {
   try {
+    const { title, description } = req.body;
+    
+    const updateData = { title, description };
+    
+    // If new file uploaded, update mediaUrl
+    if (req.file) {
+      updateData.mediaUrl = `/uploads/${req.file.filename}`;
+    }
+
     const post = await Post.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      updateData,
       { new: true }
     );
+
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
 
     res.json(post);
   } catch (err) {
@@ -65,7 +88,18 @@ async function updatePost(req, res) {
 // DELETE POST
 async function deletePost(req, res) {
   try {
-    const post = await Post.findByIdAndDelete(req.params.id);
+    const post = await Post.findById(req.params.id);
+    
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    // Optional: Check if user owns the post
+    if (post.user.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "You can only delete your own posts" });
+    }
+
+    await post.deleteOne();
     res.json({ message: "Post deleted", post });
   } catch (err) {
     console.error("Delete Error:", err);
@@ -76,7 +110,7 @@ async function deletePost(req, res) {
 module.exports = {
   createPost,
   getPosts,
-  getPostById,   // <-- REQUIRED
+  getPostById,
   updatePost,
   deletePost
 };
