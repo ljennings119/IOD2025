@@ -64,7 +64,7 @@ export default function Home() {
           <article className="box">
             <header><h2>Platypus</h2></header>
             <div className="alert alert-info">
-              Fun fact: Male platypuses have venomous spurs!
+              Fun fact: Male platypuses have venomous spurs!!
             </div>
             <footer>
               <Link to="/platypus" className="button alt">Learn More</Link>
